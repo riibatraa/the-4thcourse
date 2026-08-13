@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the 4thCourse — dinner with five strangers, Delhi</title>
+<meta name="description" content="the 4thCourse is a members' dining club. Every dinner has a fourth course — the one after the plates are cleared, when the strangers become the point. Once a week, we seat you at it. Members only, Delhi, est. 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#9DAE8B;
+    --pine:#25342B;
+    --pine-2:#1D2A22;
+    --oxblood:#5E1519;
+    --rose:#B0837F;
+    --cream:#F7F0DA;
+    --cream-2:#FBF7E8;
+    --sky:#CFE1E9;
+    --navy:#1E3048;
+
+    --hair:rgba(37,52,43,.28);
+    --hair-cream:rgba(247,240,218,.32);
+
+    --caslon:"Libre Caslon Display",Georgia,serif;
+    --text:"Libre Caslon Text",Georgia,serif;
+    --script:"Pinyon Script",cursive;
+    --sans:"Instrument Sans",system-ui,sans-serif;
+
+    --pad:clamp(1.25rem,5vw,6rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--cream);color:var(--pine);font-family:var(--text);font-size:clamp(15px,1.05vw,17px);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  .label{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:.62rem;font-weight:600}
+  h1,h2,h3{font-family:var(--caslon);font-weight:400;line-height:1.04;letter-spacing:.005em}
+
+  .pinstripe{background-image:repeating-linear-gradient(90deg,transparent 0 15px,var(--pine) 15px 17px)}
+  .checker{background:repeating-conic-gradient(var(--oxblood) 0 25%,var(--rose) 0 50%) 50%/56px 56px}
+
+  section{padding:clamp(3.5rem,8vw,7rem) var(--pad);position:relative}
+  .eyebrow{display:flex;align-items:center;gap:.7em;font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:.62rem;font-weight:600;color:var(--oxblood);margin-bottom:1.8rem}
+  .eyebrow::before{content:"";width:1.7rem;height:1px;background:currentColor}
+  .on-dark .eyebrow{color:var(--sage)}
+
+  .crest{display:inline-block}
+  .crest svg{display:block}
+
+  .card{background:var(--cream-2);border:1px solid var(--hair);padding:1.4rem 1.6rem;display:inline-block;box-shadow:0 1px 0 rgba(37,52,43,.06)}
+  .card .cw{font-family:var(--caslon);font-size:1.35rem;letter-spacing:.12em;text-transform:uppercase;line-height:1}
+  .card .cr{display:flex;justify-content:space-between;gap:2.2rem;margin-top:.9rem;border-top:1px solid var(--hair);padding-top:.7rem}
+  .card .cr span{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.54rem;font-weight:600;line-height:1.5;color:var(--pine)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:.75rem var(--pad);background:rgba(247,240,218,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+  .nav-brand{display:flex;align-items:center;gap:.7rem}
+  .nav-brand .wm{font-family:var(--caslon);font-size:1rem;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase}
+  .navlinks{display:flex;align-items:center;gap:1.5rem}
+  .navlinks a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.6rem;font-weight:600;text-decoration:none;opacity:.72;transition:opacity .2s}
+  .navlinks a:hover{opacity:1}
+  .navlinks .apply{background:var(--pine);color:var(--cream);padding:.6rem 1rem;opacity:1}
+  .navlinks .apply:hover{background:var(--oxblood)}
+  @media(max-width:820px){.navlinks a:not(.apply){display:none}}
+
+  /* hero */
+  .hero{padding-top:clamp(2rem,4vw,3.5rem);padding-bottom:0;overflow:hidden}
+  .hero-rule{display:flex;justify-content:space-between;font-family:var(--sans);text-transform:uppercase;letter-spacing:.2em;font-size:.6rem;font-weight:600;opacity:.65;border-bottom:1px solid var(--hair);padding-bottom:.9rem;margin-bottom:clamp(2rem,5vw,3.5rem)}
+  .hero-main{display:grid;grid-template-columns:1.5fr .95fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
+  @media(max-width:900px){.hero-main{grid-template-columns:1fr}}
+  .hero-the{font-family:var(--script);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--navy);line-height:.8;margin-left:.15em}
+  .hero-word{font-family:var(--caslon);font-size:clamp(2.9rem,11vw,8.4rem);line-height:.9;letter-spacing:.01em;color:var(--pine)}
+  .hero-word .num{font-feature-settings:"lnum"}
+  .hero-desc{font-family:var(--sans);text-transform:uppercase;letter-spacing:.24em;font-size:.64rem;font-weight:600;color:var(--oxblood);margin-top:1.1rem}
+  .hero-sub{font-family:var(--text);font-size:clamp(1.1rem,2.3vw,1.5rem);line-height:1.34;max-width:40ch;margin-top:1.4rem}
+  .hero-sub em{font-style:italic;color:var(--oxblood)}
+  .hero-side{display:flex;flex-direction:column;gap:1.4rem;align-items:flex-start}
+  .btn{display:inline-block;background:var(--pine);color:var(--cream);font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.66rem;font-weight:600;padding:1rem 1.5rem;text-decoration:none;transition:background .2s,transform .2s}
+  .btn:hover{background:var(--oxblood);transform:translateY(-1px)}
+  .btn.wide{width:100%;text-align:center}
+  .cta-note{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.56rem;font-weight:600;opacity:.6}
+
+  .drop{margin-top:clamp(2.5rem,5vw,4rem);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2.5rem;padding:1.1rem 0}
+  .drop .dl{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.6rem;font-weight:600}
+  .drop .dl b{color:var(--oxblood)}
+  .count{display:flex;gap:1.3rem;margin-left:auto}
+  .count .u{text-align:center}
+  .count .n{font-family:var(--caslon);font-size:clamp(1.5rem,3.5vw,2.2rem);font-variant-numeric:tabular-nums;line-height:1}
+  .count .c{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.5rem;font-weight:600;opacity:.55;margin-top:.35rem;display:block}
+
+  .hero-band{position:relative;height:clamp(80px,12vw,120px);margin-top:clamp(2rem,4vw,3rem);border-top:1px solid var(--hair)}
+  .hero-band .stripes{position:absolute;inset:0;opacity:.9}
+  .hero-band .chk{position:absolute;right:0;top:0;bottom:0;width:clamp(120px,20vw,240px)}
+  .hero-band .badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--cream);padding:.4rem 1.2rem}
+
+  /* ticker */
+  .ticker{background:var(--pine);color:var(--cream);overflow:hidden;padding:.7rem 0;white-space:nowrap}
+  .tick{display:inline-flex;gap:2.2rem;animation:scroll 36s linear infinite;font-family:var(--sans);text-transform:uppercase;letter-spacing:.2em;font-size:.6rem;font-weight:600}
+  .tick .d{color:var(--sage)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.tick{animation:none}}
+
+  /* manifesto */
+  .manifesto{background:var(--sage);color:var(--pine)}
+  .man-grid{display:grid;grid-template-columns:.75fr 1.4fr;gap:clamp(1.5rem,4vw,4rem)}
+  @media(max-width:860px){.man-grid{grid-template-columns:1fr}}
+  .man-side li{list-style:none;font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.62rem;font-weight:600;border-top:1px solid rgba(37,52,43,.3);padding:.7rem 0}
+  .man-q{font-family:var(--caslon);font-size:clamp(1.8rem,4.6vw,3.2rem);line-height:1.08}
+  .man-q em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
+  .man-body{margin-top:1.6rem;max-width:48ch;font-size:1.05rem;line-height:1.65}
+  .nohead{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(37,52,43,.28);margin-top:2.6rem;border:1px solid rgba(37,52,43,.28)}
+  @media(max-width:700px){.nohead{grid-template-columns:1fr}}
+  .nohead div{background:var(--sage);padding:1.4rem}
+  .nohead h4{font-family:var(--caslon);font-size:1.3rem;margin-bottom:.4rem}
+  .nohead p{font-size:.92rem;line-height:1.5}
+
+  /* how */
+  .how{background:var(--pine);color:var(--cream)}
+  .how h2{font-size:clamp(2rem,5.5vw,3.6rem);max-width:17ch;margin-bottom:2.8rem}
+  .how h2 em{font-family:var(--text);font-style:italic;color:var(--sage)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair-cream);border:1px solid var(--hair-cream)}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--pine);padding:2rem 1.7rem 2.3rem}
+  .step .rn{font-family:var(--script);font-size:3.4rem;color:var(--sage);line-height:.7;margin-bottom:.8rem}
+  .step h3{font-family:var(--caslon);font-size:1.4rem;margin-bottom:.7rem}
+  .step p{font-size:.95rem;opacity:.85;line-height:1.55;max-width:34ch}
+  .step .n{margin-top:1.1rem;font-family:var(--sans);text-transform:uppercase;letter-spacing:.13em;font-size:.54rem;font-weight:600;color:var(--sage);line-height:1.8}
+
+  /* table */
+  .table-sec{background:var(--oxblood);color:var(--cream)}
+  .table-sec .eyebrow{color:var(--rose)}
+  .thead{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.6rem}
+  .thead h2{font-size:clamp(2rem,5.5vw,3.6rem);max-width:14ch}
+  .thead h2 em{font-family:var(--text);font-style:italic;color:var(--rose)}
+  .tstats{display:flex;gap:2.2rem;flex-wrap:wrap}
+  .tstats .k{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.54rem;font-weight:600;opacity:.75;border-top:1px solid var(--hair-cream);padding-top:.5rem}
+  .tstats .v{font-family:var(--caslon);font-size:1.4rem;margin-top:.15rem}
+  .seat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair-cream);border:1px solid var(--hair-cream)}
+  @media(max-width:640px){.seat-row{grid-template-columns:repeat(2,1fr)}}
+  .seat{background:var(--oxblood);padding:1.3rem 1.2rem;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+  .seat.in{opacity:1;transform:none}
+  .seat.you{background:var(--cream);color:var(--pine)}
+  .seat .s{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.52rem;font-weight:600;opacity:.6}
+  .seat .who{font-family:var(--caslon);font-size:1.55rem;margin-top:.4rem;line-height:1}
+  .seat .role{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.55rem;font-weight:600;opacity:.72;margin-top:.5rem;line-height:1.5}
+  .seat.you .who{color:var(--oxblood)}
+  .seat-cap{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.58rem;font-weight:600;opacity:.85;margin-top:1.4rem;max-width:56ch;line-height:1.9}
+
+  /* settings */
+  .settings{background:var(--cream)}
+  .settings h2{font-size:clamp(2rem,5.5vw,3.4rem);max-width:19ch;margin-bottom:.7rem}
+  .settings h2 em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
+  .settings .intro{max-width:54ch;margin-bottom:2.8rem;font-size:1.02rem;line-height:1.65}
+  .dims{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  @media(max-width:900px){.dims{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.dims{grid-template-columns:1fr}}
+  .dim{background:var(--cream);padding:1.5rem 1.3rem 1.7rem}
+  .dim .rn{font-family:var(--script);font-size:1.7rem;color:var(--navy);line-height:.7}
+  .dim h4{font-family:var(--caslon);font-size:1.3rem;margin:.55rem 0 .5rem}
+  .dim p{font-size:.9rem;line-height:1.5;opacity:.85}
+  .bar{height:4px;background:var(--hair);margin-top:1.1rem;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--pine);width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+
+  /* safety */
+  .safety{background:var(--navy);color:var(--cream)}
+  .safety .eyebrow{color:var(--sky)}
+  .safety h2{font-size:clamp(1.9rem,5vw,3.2rem);max-width:16ch;margin-bottom:2.4rem}
+  .safety h2 em{font-family:var(--text);font-style:italic;color:var(--sky)}
+  .safe-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair-cream);border:1px solid var(--hair-cream)}
+  @media(max-width:720px){.safe-grid{grid-template-columns:1fr}}
+  .safe{background:var(--navy);padding:1.7rem 1.6rem}
+  .safe .chk{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.54rem;font-weight:600;color:var(--sky);display:flex;gap:.5em;align-items:center;margin-bottom:.8rem}
+  .safe .chk::before{content:"✓"}
+  .safe h4{font-family:var(--caslon);font-size:1.3rem;margin-bottom:.5rem}
+  .safe p{font-size:.92rem;line-height:1.55;opacity:.85}
+
+  /* voices */
+  .voices{background:var(--sky);color:var(--navy)}
+  .voices h2{font-size:clamp(2rem,5.5vw,3.4rem);margin-bottom:2.8rem}
+  .voices h2 em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  @media(max-width:860px){.vgrid{grid-template-columns:1fr}}
+  .v{border-top:2px solid var(--navy);padding-top:1.3rem}
+  .v blockquote{font-family:var(--caslon);font-size:1.35rem;line-height:1.2;margin-bottom:.9rem}
+  .v p{font-size:.92rem;line-height:1.55;margin-bottom:1.1rem;opacity:.82}
+  .v cite{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.55rem;font-weight:600;font-style:normal;opacity:.7}
+
+  .press{background:var(--sky);color:var(--navy);padding-top:0}
+  .press .row{display:flex;flex-wrap:wrap;gap:2.5rem;border-top:1px solid rgba(30,48,72,.25);padding-top:2rem}
+  .press .p{max-width:26ch}
+  .press blockquote{font-family:var(--caslon);font-size:1.1rem;line-height:1.3;margin-bottom:.5rem}
+  .press cite{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.55rem;font-weight:600;font-style:normal;color:var(--oxblood)}
+
+  /* join */
+  .join{background:var(--pine);color:var(--cream)}
+  .join-top{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(1.5rem,4vw,4rem);align-items:end;margin-bottom:3.4rem}
+  @media(max-width:860px){.join-top{grid-template-columns:1fr}}
+  .join h2{font-size:clamp(2.2rem,6vw,3.8rem)}
+  .join h2 em{font-family:var(--text);font-style:italic;color:var(--sage)}
+  .price-card{background:var(--cream);color:var(--pine);padding:1.7rem;border:1px solid var(--hair)}
+  .price{font-family:var(--caslon);font-size:3rem;line-height:1}
+  .price small{display:block;font-family:var(--sans);text-transform:uppercase;letter-spacing:.13em;font-size:.56rem;font-weight:600;opacity:.7;margin-top:.7rem;line-height:1.8}
+  .price-card .btn{margin-top:1.3rem;background:var(--oxblood)}
+  .price-card .btn:hover{background:var(--pine)}
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
+  @media(max-width:760px){.faq{grid-template-columns:1fr}}
+  details{border-top:1px solid var(--hair-cream);padding:1rem 0}
+  summary{font-family:var(--caslon);font-size:1.15rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--sans);color:var(--sage);font-size:1.1rem}
+  details[open] summary::after{content:"–"}
+  details p{font-size:.95rem;line-height:1.6;margin-top:.7rem;opacity:.85;max-width:54ch}
+
+  .foot-checker{height:clamp(70px,10vw,110px)}
+  footer{background:var(--pine);color:var(--cream);padding:clamp(3rem,7vw,5rem) var(--pad) 2.4rem}
+  .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.4rem}
+  .foot-script{font-family:var(--script);font-size:clamp(3rem,10vw,7.5rem);line-height:.7;color:var(--cream)}
+  .foot-cols{display:flex;flex-wrap:wrap;gap:2.4rem 4rem;border-top:1px solid var(--hair-cream);padding-top:2rem}
+  .foot-col h5{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.55rem;font-weight:600;opacity:.6;margin-bottom:1rem}
+  .foot-col a{display:block;font-family:var(--sans);text-transform:uppercase;letter-spacing:.12em;font-size:.6rem;font-weight:600;text-decoration:none;opacity:.85;margin-bottom:.5rem}
+  .foot-col a:hover{opacity:1;color:var(--sage)}
+  .foot-note{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.53rem;font-weight:600;opacity:.5;margin-top:2.4rem;line-height:1.9}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <span class="wm">the 4thCourse</span>
+  </div>
+  <div class="navlinks">
+    <a href="#how">How it works</a>
+    <a href="#table">The table</a>
+    <a href="#voices">Members</a>
+    <a href="#faq">FAQ</a>
+    <a class="apply" href="#join">Take a seat →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-rule">
+    <span>A members' dining club · Delhi · NCR</span>
+    <span>Members only · Est. MMXXVI</span>
+  </div>
+
+  <div class="hero-main">
+    <div>
+      <div class="hero-the">the</div>
+      <div class="hero-word"><span class="num">4</span>thCourse</div>
+      <div class="hero-desc">Dinner with five strangers</div>
+      <p class="hero-sub">Every great dinner has a fourth course — the one after the plates are cleared, when no one's watching the clock and the strangers have <em>become the point</em>. It's the only course we serve. Once a week, we seat you at it.</p>
+    </div>
+
+    <div class="hero-side">
+      <div class="card">
+        <div class="cw">the 4thCourse</div>
+        <div class="cr">
+          <span>Members<br>only</span>
+          <span>Table<br>for six</span>
+          <span>Est. 26<br>Delhi</span>
+        </div>
+      </div>
+
+      <a class="btn wide" href="#join">Take the seating quiz →</a>
+      <span class="cta-note">Three minutes · no profile · no account</span>
+    </div>
+  </div>
+
+  <div class="drop">
+    <div class="dl">The drop · <b>Thursdays, 7:07 PM</b> · your seat lands on WhatsApp</div>
+    <div class="count" id="count" aria-label="Time to next drop">
+      <div class="u"><span class="n" id="d">–</span><span class="c">days</span></div>
+      <div class="u"><span class="n" id="h">–</span><span class="c">hrs</span></div>
+      <div class="u"><span class="n" id="m">–</span><span class="c">min</span></div>
+      <div class="u"><span class="n" id="s">–</span><span class="c">sec</span></div>
+    </div>
+  </div>
+
+  <div class="hero-band" aria-hidden="true">
+    <div class="stripes pinstripe" style="right:clamp(120px,20vw,240px)"></div>
+    <div class="chk checker"></div>
+    <div class="badge label">Six seats · no head of the table</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="tick">
+    <span>The fourth course, every week</span><span class="d">◆</span><span>No head of the table</span><span class="d">◆</span>
+    <span>Five members, no profiles</span><span class="d">◆</span><span>ID-verified</span><span class="d">◆</span>
+    <span>Public venues, always</span><span class="d">◆</span><span>Cancel anytime</span><span class="d">◆</span>
+    <span>Delhi · Gurgaon · Noida</span><span class="d">◆</span>
+    <span>The fourth course, every week</span><span class="d">◆</span><span>No head of the table</span><span class="d">◆</span>
+    <span>Five members, no profiles</span><span class="d">◆</span><span>ID-verified</span><span class="d">◆</span>
+    <span>Public venues, always</span><span class="d">◆</span><span>Cancel anytime</span><span class="d">◆</span>
+    <span>Delhi · Gurgaon · Noida</span><span class="d">◆</span>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="man-grid">
+    <ul class="man-side">
+      <li>On loneliness, quietly</li>
+      <li>On friendship after 30</li>
+      <li>On the third place</li>
+      <li>On the fourth course</li>
+    </ul>
+    <div>
+      <p class="eyebrow">Why a table</p>
+      <p class="man-q">You can't <em>schedule</em> your way into new friends. You have to sit down to a table where you don't already know the ending.</p>
+      <p class="man-body">The first three courses are logistics — the ordering, the eating, the small talk. The fourth is where it turns: plates gone, the check ignored, the person across from you halfway through a story you'll retell for years. That course doesn't happen with your usual people. It happens with strangers chosen by how you actually show up at a table — not by a photo you'd post. That's the whole club.</p>
+    </div>
+  </div>
+  <div class="nohead">
+    <div><h4>No swiping</h4><p>You get the seat or you don't. No matches, no inbox, no one to chase across an app.</p></div>
+    <div><h4>No profiles</h4><p>We never show a face, an age, or a bio. The night itself is the introduction.</p></div>
+    <div><h4>No head</h4><p>Round tables, always. Nobody hosts, nobody sits at the head — everyone is across from someone.</p></div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how on-dark" id="how">
+  <p class="eyebrow">The format · two minutes</p>
+  <h2>Three steps to your <em>fourth course</em>.</h2>
+  <div class="steps">
+    <div class="step"><div class="rn">i</div><h3>Take the seating quiz</h3><p>Eight questions, three minutes. We read you across five ways of being at a table — not a profile, a place setting.</p><div class="n">A fingerprint, not a label. It decides who you sit with, and who you don't.</div></div>
+    <div class="step"><div class="rn">ii</div><h3>The Thursday drop</h3><p>Every Thursday at 7:07 PM your WhatsApp buzzes. Inside: the venue, the night, your one-line persona. No faces yet.</p><div class="n">One curated night per table per week. You don't pick the venue, the night, or the strangers.</div></div>
+    <div class="step"><div class="rn">iii</div><h3>Show up. Stay for the fourth.</h3><p>Turn up when the drop says. Pay your own bill. Stay as long as the table wants to. Tell us who you'd see again.</p><div class="n">That last bit feeds the next match. The seating sharpens every week.</div></div>
+  </div>
+</section>
+
+<!-- TABLE -->
+<section class="table-sec on-dark" id="table">
+  <div class="thead">
+    <div><p class="eyebrow">Your table · always six</p><h2>Five members. One <em>round</em> table.</h2></div>
+    <div class="tstats">
+      <div><div class="k">Picked by</div><div class="v">Quiz + a human</div></div>
+      <div><div class="k">Built around</div><div class="v">Five settings</div></div>
+      <div><div class="k">Seats</div><div class="v">Six, no head</div></div>
+    </div>
+  </div>
+  <div class="seat-row" id="seatrow">
+    <div class="seat you"><span class="s">Seat 01</span><span class="who">You</span><span class="role">matched to five ↓</span></div>
+    <div class="seat"><span class="s">Seat 02</span><span class="who">Anaya</span><span class="role">Editor · Nizamuddin</span></div>
+    <div class="seat"><span class="s">Seat 03</span><span class="who">Devraj</span><span class="role">Architect · Shahpur Jat</span></div>
+    <div class="seat"><span class="s">Seat 04</span><span class="who">Meher</span><span class="role">Oncologist · Vasant Kunj</span></div>
+    <div class="seat"><span class="s">Seat 05</span><span class="who">Kabir</span><span class="role">Founder · Saket</span></div>
+    <div class="seat"><span class="s">Seat 06</span><span class="who">Ira</span><span class="role">Won't say · Hauz Khas</span></div>
+  </div>
+  <p class="seat-cap">Six people, similar enough to click and different enough to be interesting. A human reads every table before the 7:07 drop.</p>
+</section>
+
+<!-- SETTINGS -->
+<section class="settings" id="settings">
+  <p class="eyebrow">The matching · a place setting, not a photo</p>
+  <h2>Five ways of showing up. We build tables where they <em>meet</em>.</h2>
+  <p class="intro">An eight-question quiz reads you across five settings — we call it the table read. Then we seat groups where the settings overlap enough to spark, and differ enough to keep the night going to the fourth course and past it.</p>
+  <div class="dims" id="dims">
+    <div class="dim"><span class="rn">i.</span><h4>Openness</h4><p>How wide the door is when a stranger sits down.</p><div class="bar"><i data-w="82"></i></div></div>
+    <div class="dim"><span class="rn">ii.</span><h4>Energy</h4><p>Whether you lift the room or read it first.</p><div class="bar"><i data-w="64"></i></div></div>
+    <div class="dim"><span class="rn">iii.</span><h4>Depth</h4><p>How fast you leave small talk behind.</p><div class="bar"><i data-w="88"></i></div></div>
+    <div class="dim"><span class="rn">iv.</span><h4>Humor</h4><p>The dry aside or the belly laugh — we clock which.</p><div class="bar"><i data-w="71"></i></div></div>
+    <div class="dim"><span class="rn">v.</span><h4>Adventure</h4><p>Who says yes to the 11 PM plan nobody else will.</p><div class="bar"><i data-w="76"></i></div></div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="safety on-dark">
+  <p class="eyebrow">Trust &amp; safety</p>
+  <h2>Five members, <em>zero</em> unknowns.</h2>
+  <div class="safe-grid">
+    <div class="safe"><div class="chk">verified</div><h4>Government ID, every seat</h4><p>Everyone uploads a valid ID before their first night. No anonymous chairs — every person at the table is real and verified.</p></div>
+    <div class="safe"><div class="chk">verified</div><h4>Public venues, always six</h4><p>Every night is at a public restaurant, in a group of six. Never one-on-one, never a private address. The format is the safeguard.</p></div>
+    <div class="safe"><div class="chk">verified</div><h4>A code with teeth</h4><p>Harassment, solicitation, or aggression means immediate, permanent removal. One message to us and we act — no second chances on safety.</p></div>
+    <div class="safe"><div class="chk">verified</div><h4>Women's safety, by design</h4><p>Balanced tables as a rule, women-only nights on request, and you'll always know the neighbourhood before you say yes.</p></div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices" id="voices">
+  <p class="eyebrow">Members say · post-night notes</p>
+  <h2>The voices <em>of the table.</em></h2>
+  <div class="vgrid">
+    <div class="v"><blockquote>“I came alone. I left with a group I now spend Sundays with.”</blockquote><p>Two writers, an architect, a doctor, and someone who refused to say what they do. I have not laughed like that on a Saturday in years.</p><cite>R. · 31 · Hauz Khas · after 6 nights</cite></div>
+    <div class="v"><blockquote>“We didn't leave until they turned the lights on.”</blockquote><p>I'm an introvert and I hate forced fun. This isn't forced — the round table finds its own rhythm and nobody's running it. The fourth course is real.</p><cite>A. · 34 · Gurgaon · after 9 nights</cite></div>
+    <div class="v"><blockquote>“No head of the table. It took me a week to feel why.”</blockquote><p>Everyone chose to be there, and no one was the host. You stop performing for the room and just — talk. That's the whole trick.</p><cite>K. · 29 · GK-II · after 4 nights</cite></div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press">
+  <div class="row">
+    <div class="p"><blockquote>“The most considered dinner club to open in India this year.”</blockquote><cite>— Placeholder, Vogue India</cite></div>
+    <div class="p"><blockquote>“A quietly radical answer to urban loneliness.”</blockquote><cite>— Placeholder, Scroll</cite></div>
+    <div class="p"><blockquote>“The rooms they send you to are the rooms you'd want to be in.”</blockquote><cite>— Placeholder, AD</cite></div>
+  </div>
+</section>
+
+<!-- JOIN + FAQ -->
+<section class="join on-dark" id="join">
+  <div class="join-top">
+    <div><p class="eyebrow">Apply within</p><h2>By spring, a <em>new</em> group of friends. The maths is the maths.</h2></div>
+    <div class="price-card">
+      <div class="price">₹1,499<small>per month · up to four weekend nights · you pay your own bill · cancel anytime</small></div>
+      <a class="btn wide" href="#">Take the seating quiz →</a>
+    </div>
+  </div>
+  <p class="eyebrow">Honest answers</p>
+  <div class="faq">
+    <details open><summary>Why “the fourth course”?</summary><p>Because the fourth course is the one you remember. The first three are the meal — the fourth is what happens after the plates are cleared, when no one leaves and the strangers have become friends. That's the part we're in the business of. The dinner is just how we get you there.</p></details>
+    <details><summary>Is this a dating app?</summary><p>No. Round tables of six, mixed, built for conversation. People meet partners sometimes — it isn't the point, and it isn't the promise.</p></details>
+    <details><summary>How much does it cost?</summary><p>₹1,499 a month, covering up to four weekend nights. You pay your own bill at the venue. Cancel anytime — no lock-in.</p></details>
+    <details><summary>Why 7:07 on Thursday?</summary><p>It's the drop. Same ritual every week so you know when to look — venue, night, and your one-line persona land on WhatsApp at exactly 7:07 PM.</p></details>
+    <details><summary>Will someone from the 4thCourse be there?</summary><p>No. The six at the table are all matched members. We do the matching, the venue, and the prompts behind the scenes. On the night, it's just the six of you.</p></details>
+    <details><summary>What kinds of nights?</summary><p>Suppers, wine bars, listening rooms, gallery openings, Sunday walks, the occasional late drive. One curated format per table per week.</p></details>
+    <details><summary>What if my table doesn't click?</summary><p>Leave whenever you like, and tell us after. Your next table will look nothing like this one — that's the design working, not failing.</p></details>
+    <details><summary>How soon do I get my first seat?</summary><p>The very next Thursday at 7:07, in most cases. No waitlist. If your cluster doesn't have six that week, it slides to the following Thursday.</p></details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="foot-checker checker" aria-hidden="true"></div>
+<footer>
+  <div class="foot-top">
+    <div class="foot-script">the fourth course</div>
+  </div>
+  <div class="foot-cols">
+    <div class="foot-col"><h5>Members</h5><a href="#join">Take a seat</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#voices">Voices</a></div>
+    <div class="foot-col"><h5>Venues</h5><a href="#">Partner with us</a><a href="mailto:venues@the4thcourse.example">venues@the4thcourse.example</a></div>
+    <div class="foot-col"><h5>Reach us</h5><a href="mailto:hello@the4thcourse.example">hello@the4thcourse.example</a><a href="#">Instagram</a></div>
+    <div class="foot-col"><h5>Fine print</h5><a href="#">Trust &amp; safety</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Refund</a></div>
+  </div>
+  <p class="foot-note">the 4thCourse · a members' dining club · est. MMXXVI · Delhi · Mumbai · Bengaluru · every seat handled with care.</p>
+</footer>
+
+<script>
+  (function(){
+    var d=document.getElementById('d'),h=document.getElementById('h'),m=document.getElementById('m'),s=document.getElementById('s');
+    function next(){var now=new Date(),t=new Date(now);t.setHours(19,7,0,0);var day=t.getDay(),add=(4-day+7)%7;if(add===0&&now>t)add=7;t.setDate(t.getDate()+add);return t;}
+    function tick(){var diff=next()-new Date();if(diff<0)diff=0;
+      d.textContent=Math.floor(diff/864e5);h.textContent=String(Math.floor(diff%864e5/36e5)).padStart(2,'0');
+      m.textContent=String(Math.floor(diff%36e5/6e4)).padStart(2,'0');s.textContent=String(Math.floor(diff%6e4/1e3)).padStart(2,'0');}
+    tick();setInterval(tick,1000);
+  })();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+    if(e.target.id==='seatrow'){e.target.querySelectorAll('.seat').forEach(function(x,i){setTimeout(function(){x.classList.add('in')},i*110)});}
+    if(e.target.id==='dims'){e.target.querySelectorAll('.bar i').forEach(function(b){b.style.width=b.dataset.w+'%'});}
+    io.unobserve(e.target);});},{threshold:.25});
+  var sr=document.getElementById('seatrow');if(sr)io.observe(sr);
+  var dm=document.getElementById('dims');if(dm)io.observe(dm);
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('.seat').forEach(function(s){s.classList.add('in')});}
+</script>
+</body>
+</html>
