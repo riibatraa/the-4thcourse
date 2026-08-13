@@ -1,10 +1,22 @@
-# Connecting the waitlist to a Google Sheet
+# The waitlist → Google Sheet
 
-The form on the site is already built and validating. It just needs four ids
-so it knows where to send people. This takes about five minutes, once.
+**Status: connected and verified.** Signups from 4thcourse.in land in the
+"The 4thCourse — Waitlist" form's response sheet.
 
-Nothing is saved until you finish this. Until then the button says
-"Not connected yet" rather than pretending someone joined.
+| | |
+|---|---|
+| Form id | `1FAIpQLSdu9SQK17bWBdipu70HMCAwAhcJ1xlZqltYjGEpVGfI39mJ5w` |
+| Name | `entry.807980480` |
+| Email | `entry.988966014` |
+| WhatsApp number | `entry.940632605` |
+
+These live in `index.html`, in the block commented `WAITLIST → GOOGLE SHEET`.
+
+Two test rows were submitted during setup — **TEST — please delete** and
+**BROWSERTEST — please delete**. Remove them from the sheet.
+
+The instructions below are kept for reference, in case the form is ever
+rebuilt or replaced.
 
 ---
 
