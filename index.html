@@ -215,11 +215,28 @@
   @media(max-width:860px){.join-top{grid-template-columns:1fr}}
   .join h2{font-size:clamp(2.2rem,6vw,3.8rem)}
   .join h2 em{font-family:var(--text);font-style:italic;color:var(--sage)}
-  .price-card{background:var(--cream);color:var(--pine);padding:1.7rem;border:1px solid var(--hair)}
-  .price{font-family:var(--caslon);font-size:3rem;line-height:1}
-  .price small{display:block;font-family:var(--sans);text-transform:uppercase;letter-spacing:.13em;font-size:.56rem;font-weight:600;opacity:.7;margin-top:.7rem;line-height:1.8}
-  .price-card .btn{margin-top:1.3rem;background:var(--oxblood)}
-  .price-card .btn:hover{background:var(--pine)}
+  /* waitlist */
+  .wl-card{background:var(--cream);color:var(--pine);padding:1.7rem;border:1px solid var(--hair)}
+  .wl-card h3{font-family:var(--caslon);font-size:1.7rem;line-height:1.05;margin-bottom:.5rem}
+  .wl-card .sub{font-size:.95rem;line-height:1.55;opacity:.8;margin-bottom:1.3rem}
+  .field{margin-bottom:.9rem}
+  .field label{display:block;font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.54rem;font-weight:600;opacity:.65;margin-bottom:.35rem}
+  .field input{width:100%;font-family:var(--text);font-size:1rem;color:var(--pine);background:var(--cream-2);border:1px solid var(--hair);padding:.75rem .8rem;border-radius:0}
+  .field input:focus{outline:2px solid var(--oxblood);outline-offset:-2px}
+  .field input[aria-invalid="true"]{border-color:var(--oxblood);background:#fbeeee}
+  .field .err{display:none;font-family:var(--sans);text-transform:uppercase;letter-spacing:.12em;font-size:.52rem;font-weight:600;color:var(--oxblood);margin-top:.35rem}
+  .field.bad .err{display:block}
+  .consent{display:flex;gap:.6rem;align-items:flex-start;margin:1.1rem 0 1.2rem}
+  .consent input{margin-top:.2rem;flex:none;width:1rem;height:1rem;accent-color:var(--oxblood)}
+  .consent label{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.53rem;font-weight:600;opacity:.7;line-height:1.7}
+  .wl-card .btn{width:100%;text-align:center;background:var(--oxblood)}
+  .wl-card .btn:hover{background:var(--pine)}
+  .wl-card .btn[disabled]{opacity:.55;cursor:default;transform:none}
+  .wl-fine{font-family:var(--sans);text-transform:uppercase;letter-spacing:.13em;font-size:.52rem;font-weight:600;opacity:.55;margin-top:.9rem;line-height:1.8}
+  .wl-done{display:none;text-align:left}
+  .wl-done .tick{font-family:var(--script);font-size:2.6rem;color:var(--oxblood);line-height:.8;display:block;margin-bottom:.6rem}
+  .wl-card.done form,.wl-card.done .sub,.wl-card.done h3{display:none}
+  .wl-card.done .wl-done{display:block}
   .faq{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
   @media(max-width:760px){.faq{grid-template-columns:1fr}}
   details{border-top:1px solid var(--hair-cream);padding:1rem 0}
@@ -266,8 +283,8 @@
     <div>
       <div class="hero-the">the</div>
       <div class="hero-word"><span class="num">4</span>thCourse</div>
-      <div class="hero-desc">Dinner with five strangers</div>
-      <p class="hero-sub">Every great dinner has a fourth course — the one after the plates are cleared, when no one's watching the clock and the strangers have <em>become the point</em>. It's the only course we serve. Once a week, we seat you at it.</p>
+      <div class="hero-desc">Dinner with five strangers · Delhi NCR</div>
+      <p class="hero-sub">Finding people who'll actually <em>try something new</em> with you shouldn't be this hard. Once a week we sit you down with five strangers at a place you'd never have picked — no group chat, no planning, no one to convince.</p>
     </div>
 
     <div class="hero-side">
@@ -280,8 +297,8 @@
         </div>
       </div>
 
-      <a class="btn wide" href="/quiz.html">Take the seating quiz →</a>
-      <span class="cta-note">Three minutes · no profile · no account</span>
+      <a class="btn wide" href="#join">Join the waitlist →</a>
+      <span class="cta-note">Free · no account · Delhi tables seating now</span>
     </div>
   </div>
 
@@ -319,9 +336,9 @@
 <!-- MANIFESTO -->
 <section class="manifesto">
   <div class="man-grid">
-    <p class="eyebrow">Why a table</p>
-    <p class="man-q">You can't <em>schedule</em> your way into new friends. You have to sit down to a table where you don't already know the ending.</p>
-    <p class="man-body">The first three courses are logistics — the ordering, the eating, the small talk. The fourth is where it turns: plates gone, the check ignored, the person across from you halfway through a story you'll retell for years. That course doesn't happen with your usual people. It happens with strangers chosen by how you actually show up at a table — not by a photo you'd post. That's the whole club.</p>
+    <p class="eyebrow">The problem</p>
+    <p class="man-q">Finding people who want to <em>try new things</em> with you shouldn't be this hard.</p>
+    <p class="man-body">You have friends. That isn't the problem. The problem is that four of you can't agree on a date, two cancel, and the new place you wanted to try is still a screenshot in your camera roll six months later. Trying something new needs someone to organise it, someone to pick, and someone willing to go first — and most weeks, nobody is all three.<br><br>So we do it instead. We choose the place, pick the night, and put five people at the table who said yes to the same thing. All you do is turn up.</p>
   </div>
   <div class="nohead">
     <div><h4>No swiping</h4><p>You get the seat or you don't. No matches, no inbox, no one to chase across an app.</p></div>
@@ -332,12 +349,12 @@
 
 <!-- HOW -->
 <section class="how on-dark" id="how">
-  <p class="eyebrow">The format · two minutes</p>
-  <h2>Three steps to your <em>fourth course</em>.</h2>
+  <p class="eyebrow">How it works · start to table</p>
+  <h2>Three steps. We do the <em>rest</em>.</h2>
   <div class="steps">
-    <div class="step"><div class="rn">i</div><h3>Take the seating quiz</h3><p>Eight questions, three minutes. We read you across five ways of being at a table — not a profile, a place setting.</p><div class="n">A fingerprint, not a label. It decides who you sit with, and who you don't.</div></div>
-    <div class="step"><div class="rn">ii</div><h3>The Thursday drop</h3><p>Every Thursday at 7:07 PM your WhatsApp buzzes. Inside: the venue, the night, your one-line persona. No faces yet.</p><div class="n">One curated night per table per week. You don't pick the venue, the night, or the strangers.</div></div>
-    <div class="step"><div class="rn">iii</div><h3>Show up. Stay for the fourth.</h3><p>Turn up when the drop says. Pay your own bill. Stay as long as the table wants to. Tell us who you'd see again.</p><div class="n">That last bit feeds the next match. The seating sharpens every week.</div></div>
+    <div class="step"><div class="rn">i</div><h3>Join the list</h3><p>Your email and number, nothing else. We're seating the first Delhi tables now and going in order — no application, no interview.</p><div class="n">You'll hear from us before your first Thursday. Leave whenever you like.</div></div>
+    <div class="step"><div class="rn">ii</div><h3>Take the seating quiz</h3><p>Eight questions, three minutes. We read how you actually are at a table — not a profile, a place setting.</p><div class="n">It decides who you sit with, and who you don't. No photo, no age, no bio.</div></div>
+    <div class="step"><div class="rn">iii</div><h3>Thursday, 7:07 PM</h3><p>Your WhatsApp buzzes with the place and the night. You turn up, pay your own bill, and stay as long as the table wants to.</p><div class="n">Somewhere you probably wouldn't have picked. That's most of the point.</div></div>
   </div>
 </section>
 
@@ -411,22 +428,55 @@
 <!-- JOIN + FAQ -->
 <section class="join on-dark" id="join">
   <div class="join-top">
-    <div><p class="eyebrow">Apply within</p><h2>By spring, a <em>new</em> group of friends. The maths is the maths.</h2></div>
-    <div class="price-card">
-      <div class="price">₹1,499<small>per month · up to four weekend nights · you pay your own bill · cancel anytime</small></div>
-      <a class="btn wide" href="/quiz.html">Take the seating quiz →</a>
+    <div><p class="eyebrow">The waitlist is open</p><h2>The next new thing you try, you won't have to <em>organise</em>.</h2></div>
+    <div class="wl-card" id="wlcard">
+      <h3>Join the waitlist</h3>
+      <p class="sub">We're seating the first Delhi tables now. Leave your email and number and we'll come to you in order.</p>
+
+      <form id="wl" novalidate>
+        <div class="field" id="f-name">
+          <label for="wl-name">First name</label>
+          <input id="wl-name" name="name" type="text" autocomplete="given-name" required>
+          <span class="err">Tell us what to call you</span>
+        </div>
+        <div class="field" id="f-email">
+          <label for="wl-email">Email</label>
+          <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+          <span class="err">That doesn't look like an email</span>
+        </div>
+        <div class="field" id="f-phone">
+          <label for="wl-phone">WhatsApp number</label>
+          <input id="wl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91" required>
+          <span class="err">Ten digits, with or without +91</span>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="wl-ok" required>
+          <label for="wl-ok">Email and message me about seats and club news. I can unsubscribe any time.</label>
+        </div>
+
+        <button class="btn" type="submit" id="wl-go">Join the waitlist →</button>
+        <p class="wl-fine">No payment · no account · we never show your number to the table</p>
+      </form>
+
+      <div class="wl-done">
+        <span class="tick" aria-hidden="true">Done</span>
+        <h3 style="display:block">You're on the list.</h3>
+        <p class="sub" style="display:block">We'll be in touch before your first Thursday. While you wait, the seating quiz is what we'll actually seat you by — it takes three minutes.</p>
+        <a class="btn" href="/quiz.html">Take the seating quiz →</a>
+      </div>
     </div>
   </div>
   <p class="eyebrow" id="faq">Honest answers</p>
   <div class="faq">
     <details open><summary>Why “the fourth course”?</summary><p>Because the fourth course is the one you remember. The first three are the meal — the fourth is what happens after the plates are cleared, when no one leaves and the strangers have become friends. That's the part we're in the business of. The dinner is just how we get you there.</p></details>
     <details><summary>Is this a dating app?</summary><p>No. Round tables of six, mixed, built for conversation. People meet partners sometimes — it isn't the point, and it isn't the promise.</p></details>
-    <details><summary>How much does it cost?</summary><p>₹1,499 a month, covering up to four weekend nights. You pay your own bill at the venue. Cancel anytime — no lock-in.</p></details>
+    <details><summary>What does it cost to join the waitlist?</summary><p>Nothing. The waitlist is free and there's no payment anywhere on this site. Membership pricing will be set before the first tables run, and anyone on the list hears it from us directly — with the option to walk away — before they're ever charged. You always pay your own bill at the venue.</p></details>
     <details><summary>Why 7:07 on Thursday?</summary><p>It's the drop. Same ritual every week so you know when to look — venue, night, and your one-line persona land on WhatsApp at exactly 7:07 PM.</p></details>
     <details><summary>Will someone from the 4thCourse be there?</summary><p>No. The six at the table are all matched members. We do the matching, the venue, and the prompts behind the scenes. On the night, it's just the six of you.</p></details>
     <details><summary>What kinds of nights?</summary><p>Suppers, wine bars, listening rooms, gallery openings, Sunday walks, the occasional late drive. One curated format per table per week.</p></details>
     <details><summary>What if my table doesn't click?</summary><p>Leave whenever you like, and tell us after. Your next table will look nothing like this one — that's the design working, not failing.</p></details>
-    <details><summary>How soon do I get my first seat?</summary><p>The very next Thursday at 7:07, in most cases. No waitlist. If your cluster doesn't have six that week, it slides to the following Thursday.</p></details>
+    <details><summary>How soon do I get my first seat?</summary><p>We're seating the first Delhi tables now, so it depends on where you land on the list and whether there are six near you who fit the same table. We'll tell you honestly where you are rather than leave you guessing.</p></details>
   </div>
 </section>
 
@@ -461,6 +511,80 @@
   var sr=document.getElementById('seatrow');if(sr)io.observe(sr);
   var dm=document.getElementById('dims');if(dm)io.observe(dm);
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('.seat').forEach(function(s){s.classList.add('in')});}
+
+  /* ------------------------------------------------------------------
+     WAITLIST → GOOGLE SHEET
+     Create a Google Form with three short-answer questions in this
+     order: First name, Email, WhatsApp number. Then fill in the four
+     ids below (see WAITLIST-SETUP.md for how to find them).
+     Until FORM_ID is set, the form validates and reports honestly that
+     it cannot send yet — it never pretends to have saved someone.
+  ------------------------------------------------------------------ */
+  (function(){
+    var FORM_ID = "";                 // the long id in the form's URL
+    var ENTRY = {
+      name:  "",                      // e.g. "entry.1234567890"
+      email: "",
+      phone: ""
+    };
+
+    var form = document.getElementById('wl');
+    if (!form) return;
+    var card = document.getElementById('wlcard');
+    var go   = document.getElementById('wl-go');
+
+    function mark(id, bad){
+      var f = document.getElementById(id);
+      f.classList.toggle('bad', bad);
+      f.querySelector('input').setAttribute('aria-invalid', bad ? 'true' : 'false');
+      return !bad;
+    }
+    function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+    function validPhone(v){
+      var d = v.replace(/[^\d]/g,'');
+      // Accept a bare 10-digit Indian mobile, or the same with 91/091 in front.
+      return /^(0?91)?[6-9]\d{9}$/.test(d);
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name  = document.getElementById('wl-name').value.trim();
+      var email = document.getElementById('wl-email').value.trim();
+      var phone = document.getElementById('wl-phone').value.trim();
+
+      var ok = mark('f-name',  name.length < 1);
+      ok = mark('f-email', !validEmail(email)) && ok;
+      ok = mark('f-phone', !validPhone(phone)) && ok;
+      if (!document.getElementById('wl-ok').checked) ok = false;
+      if (!ok) return;
+
+      if (!FORM_ID || !ENTRY.email){
+        go.textContent = 'Not connected yet — email hello@4thcourse.in';
+        go.disabled = true;
+        return;
+      }
+
+      go.disabled = true;
+      go.textContent = 'Saving your seat…';
+
+      var body = new URLSearchParams();
+      body.append(ENTRY.name,  name);
+      body.append(ENTRY.email, email);
+      body.append(ENTRY.phone, phone);
+
+      // Google Forms does not send CORS headers, so the response is opaque:
+      // a resolved promise means the request left the browser, not that the
+      // row was written. Google accepts well-formed posts reliably, and the
+      // alternative (an iframe hack) fails just as silently.
+      fetch('https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse',
+            {method:'POST', mode:'no-cors', body:body})
+        .then(function(){ card.classList.add('done'); })
+        .catch(function(){
+          go.disabled = false;
+          go.textContent = 'Didn’t send — try again';
+        });
+    });
+  })();
 </script>
 </body>
 </html>
