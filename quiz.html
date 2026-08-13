@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The seating quiz — the 4thCourse</title>
+<meta name="description" content="Eight questions, three minutes. The table read decides who you sit with, and who you don't. No profile, no account.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#25342B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2325342B'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23F7F0DA' text-anchor='middle'%3E4%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#9DAE8B; --pine:#25342B; --oxblood:#5E1519; --rose:#B0837F;
+    --cream:#F7F0DA; --cream-2:#FBF7E8; --sky:#CFE1E9; --navy:#1E3048;
+    --hair:rgba(37,52,43,.28); --hair-cream:rgba(247,240,218,.32);
+    --caslon:"Libre Caslon Display",Georgia,serif;
+    --text:"Libre Caslon Text",Georgia,serif;
+    --script:"Pinyon Script",cursive;
+    --sans:"Instrument Sans",system-ui,sans-serif;
+    --pad:clamp(1.25rem,5vw,6rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);color:var(--pine);font-family:var(--text);font-size:clamp(15px,1.05vw,17px);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--caslon);font-weight:400;line-height:1.05}
+  .sans{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.6rem;font-weight:600}
+
+  /* chrome */
+  header{display:flex;align-items:center;justify-content:space-between;padding:.9rem var(--pad);border-bottom:1px solid var(--hair)}
+  header .wm{font-family:var(--caslon);font-size:1rem;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;text-decoration:none}
+  header .exit{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.58rem;font-weight:600;opacity:.6;text-decoration:none}
+  header .exit:hover{opacity:1}
+
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,6vw,4rem) var(--pad);max-width:56rem;width:100%;margin:0 auto}
+
+  /* progress */
+  .prog{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(1.8rem,4vw,2.8rem)}
+  .prog .track{flex:1;height:2px;background:var(--hair);position:relative}
+  .prog .track i{position:absolute;inset:0 auto 0 0;background:var(--oxblood);width:0;transition:width .45s cubic-bezier(.2,.7,.2,1)}
+  .prog .cnt{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.56rem;font-weight:600;opacity:.6;white-space:nowrap}
+
+  /* question */
+  .stage{position:relative}
+  .q{animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.q{animation:none}.prog .track i{transition:none}}
+  .scene{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:.6rem;font-weight:600;color:var(--oxblood);margin-bottom:1.1rem;display:flex;align-items:center;gap:.7em}
+  .scene::before{content:"";width:1.7rem;height:1px;background:currentColor}
+  .qt{font-size:clamp(1.5rem,4vw,2.5rem);max-width:24ch;margin-bottom:1.9rem}
+  .qt em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
+
+  .opts{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .opt{background:var(--cream-2);border:0;text-align:left;width:100%;font-family:var(--text);font-size:1.02rem;line-height:1.5;color:var(--pine);padding:1.15rem 1.3rem;cursor:pointer;display:flex;gap:1rem;align-items:baseline;transition:background .18s,color .18s}
+  .opt .mk{font-family:var(--script);font-size:1.5rem;color:var(--navy);line-height:.7;flex:none;width:1.2rem;transition:color .18s}
+  .opt:hover{background:var(--pine);color:var(--cream)}
+  .opt:hover .mk{color:var(--sage)}
+  .opt:focus-visible{outline:2px solid var(--oxblood);outline-offset:-2px}
+  .opt[aria-pressed="true"]{background:var(--pine);color:var(--cream)}
+  .opt[aria-pressed="true"] .mk{color:var(--sage)}
+
+  .navrow{display:flex;justify-content:space-between;align-items:center;margin-top:1.6rem;gap:1rem}
+  .back{background:none;border:0;font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.58rem;font-weight:600;opacity:.55;cursor:pointer;color:inherit;padding:.5rem 0}
+  .back:hover{opacity:1}
+  .back[hidden]{visibility:hidden;display:block}
+  .hint{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.54rem;font-weight:600;opacity:.45}
+
+  /* intro + result share these */
+  .lede{font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.45;max-width:46ch;margin-bottom:1.8rem}
+  .lede em{font-style:italic;color:var(--oxblood)}
+  .btn{display:inline-block;background:var(--pine);color:var(--cream);font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.66rem;font-weight:600;padding:1rem 1.6rem;text-decoration:none;border:0;cursor:pointer;transition:background .2s,transform .2s}
+  .btn:hover{background:var(--oxblood);transform:translateY(-1px)}
+  .btn.ghost{background:none;color:var(--pine);border:1px solid var(--hair)}
+  .btn.ghost:hover{background:var(--pine);color:var(--cream)}
+  .meta{font-family:var(--sans);text-transform:uppercase;letter-spacing:.16em;font-size:.56rem;font-weight:600;opacity:.6;margin-top:1rem}
+
+  /* result */
+  .persona{font-size:clamp(2rem,6vw,3.6rem);margin:.3rem 0 .8rem}
+  .persona em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
+  .pline{font-size:1.08rem;line-height:1.6;max-width:50ch;margin-bottom:2.2rem}
+  .read{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-bottom:2rem}
+  @media(max-width:760px){.read{grid-template-columns:1fr}}
+  .rd{background:var(--cream);padding:1.2rem 1.1rem 1.4rem}
+  .rd h4{font-family:var(--caslon);font-size:1.15rem;margin-bottom:.15rem}
+  .rd .pc{font-family:var(--sans);letter-spacing:.14em;font-size:.54rem;font-weight:600;opacity:.55;text-transform:uppercase}
+  .rd .bar{height:4px;background:var(--hair);margin-top:.9rem;overflow:hidden}
+  .rd .bar i{display:block;height:100%;background:var(--pine);width:0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .rd.top .bar i{background:var(--oxblood)}
+  .rd .note{font-size:.86rem;line-height:1.45;opacity:.8;margin-top:.7rem}
+
+  .handoff{background:var(--pine);color:var(--cream);padding:1.8rem 1.7rem;display:grid;gap:1.1rem}
+  .handoff h3{font-size:1.5rem}
+  .handoff p{font-size:.95rem;line-height:1.6;opacity:.85;max-width:46ch}
+  .handoff .btn{background:var(--oxblood);justify-self:start}
+  .handoff .btn:hover{background:var(--cream);color:var(--pine)}
+  .handoff .fine{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.53rem;font-weight:600;opacity:.55;line-height:1.8}
+
+  .again{margin-top:1.6rem;display:flex;gap:1rem;flex-wrap:wrap}
+
+  footer{padding:1.4rem var(--pad);border-top:1px solid var(--hair);font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.53rem;font-weight:600;opacity:.5}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wm" href="/">the 4thCourse</a>
+  <a class="exit" href="/">Leave the quiz ✕</a>
+</header>
+
+<main>
+  <!-- INTRO -->
+  <section id="intro">
+    <p class="scene">The seating quiz</p>
+    <h1 class="qt">A place setting, <em>not</em> a photo.</h1>
+    <p class="lede">Eight questions about how you actually behave at a table — not what you'd put on a profile. It takes about three minutes. There are no right answers, and nothing here is scored as better or worse.</p>
+    <button class="btn" id="start">Begin the table read →</button>
+    <p class="meta">No account · no profile · nothing saved to your device</p>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section id="quiz" hidden>
+    <div class="prog">
+      <div class="track"><i id="bar"></i></div>
+      <span class="cnt" id="cnt">01 / 08</span>
+    </div>
+    <div class="stage" id="stage" aria-live="polite"></div>
+    <div class="navrow">
+      <button class="back" id="back" hidden>← Previous</button>
+      <span class="hint">Pick the one that's most true, not the best one</span>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" hidden>
+    <p class="scene">Your table read</p>
+    <h1 class="persona" id="pname"></h1>
+    <p class="pline" id="pline"></p>
+    <div class="read" id="read"></div>
+    <div class="handoff">
+      <h3>Ready for a Thursday?</h3>
+      <p>Your table read is what we seat you by. Send it over and you're in the next drop — venue, night, and your one-line persona land on WhatsApp at 7:07 PM.</p>
+      <a class="btn" id="send" href="#">Send my table read →</a>
+      <p class="fine">You pay your own bill · cancel anytime · we never show your face, age, or bio to the table</p>
+    </div>
+    <div class="again">
+      <button class="btn ghost" id="retake">Take it again</button>
+      <a class="btn ghost" href="/">Back to the club</a>
+    </div>
+  </section>
+</main>
+
+<footer>the 4thCourse · a members' dining club · Delhi · NCR</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ------------------------------------------------------------------
+     WHERE THE RESULT GOES.
+     Set WHATSAPP to the club's number in full international format,
+     digits only, no + and no spaces. Example: "919812345678".
+     Leave it empty and the button falls back to the email below.
+  ------------------------------------------------------------------ */
+  var WHATSAPP = "";
+  var EMAIL    = "hello@4thcourse.in";
+
+  var DIMS = [
+    {k:"O", name:"Openness",  note:"How wide the door is when a stranger sits down."},
+    {k:"E", name:"Energy",    note:"Whether you lift the room or read it first."},
+    {k:"D", name:"Depth",     note:"How fast you leave small talk behind."},
+    {k:"H", name:"Humor",     note:"The dry aside or the belly laugh."},
+    {k:"A", name:"Adventure", note:"Who says yes to the 11 PM plan."}
+  ];
+
+  /* Eight questions. Each option carries weights across the five settings.
+     Weights are deliberately mixed — no option is a dead end, and every
+     option scores something, so there is no "wrong" way through. */
+  var Q = [
+    { scene:"8:12 PM · the first silence",
+      text:"You've just sat down. Six people, nobody has spoken yet.",
+      opts:[
+        {t:"You ask the first question.",                          w:{O:2,E:2}},
+        {t:"You wait for someone else to, then answer generously.", w:{O:2,D:1}},
+        {t:"You say something about how strange this is.",          w:{H:2,E:1}},
+        {t:"You're fine in it. Silence breaks on its own.",         w:{D:2,E:-1}}
+      ]},
+    { scene:"The inevitable question",
+      text:"Someone asks what you do. Your honest instinct:",
+      opts:[
+        {t:"Give the title, move it along.",                        w:{E:1,D:-1}},
+        {t:"Give the title, then the version that's actually true.", w:{D:2,O:1}},
+        {t:"Deflect, and ask them first.",                          w:{O:2,D:1}},
+        {t:"Answer unhelpfully and see who bites.",                 w:{H:2,A:1}}
+      ]},
+    { scene:"The table splits",
+      text:"Two conversations have formed. You:",
+      opts:[
+        {t:"Pull them back into one.",                              w:{E:2,O:1}},
+        {t:"Go deep with the person beside you.",                   w:{D:2}},
+        {t:"Float between both.",                                   w:{O:2,E:1}},
+        {t:"Stay put and listen to the better one.",                w:{D:2,E:-1}}
+      ]},
+    { scene:"Somebody's wrong",
+      text:"A person at the table says something you genuinely disagree with.",
+      opts:[
+        {t:"Say so, warmly, and dig in.",                           w:{D:2,E:1}},
+        {t:"Ask what got them there.",                              w:{O:2,D:1}},
+        {t:"Let it go. Not tonight, not with strangers.",           w:{O:1,D:-1}},
+        {t:"Make it funny first, serious second.",                  w:{H:2,D:1}}
+      ]},
+    { scene:"11:40 PM · the check is paid",
+      text:"The plates are long gone. Somebody looks at the door.",
+      opts:[
+        {t:"You suggest the next place.",                           w:{A:2,E:2}},
+        {t:"You'd go, if someone else suggests it.",                w:{A:1,O:1}},
+        {t:"You walk someone to their cab and head home.",          w:{O:2,A:-1}},
+        {t:"You left at eleven. You had a thing.",                  w:{A:-2,E:-1}}
+      ]},
+    { scene:"What actually lands",
+      text:"The funniest thing at a table is usually:",
+      opts:[
+        {t:"A dry line nobody saw coming.",                         w:{H:2,D:1}},
+        {t:"A story that gets worse the longer it runs.",           w:{H:2,E:1}},
+        {t:"Two strangers finishing each other's bit.",             w:{H:1,O:2}},
+        {t:"Honestly? You chase interesting, not funny.",           w:{D:2,H:-1}}
+      ]},
+    { scene:"It gets heavy",
+      text:"Someone tells you something genuinely difficult, over dinner, unprompted.",
+      opts:[
+        {t:"Match it with something of your own.",                  w:{O:2,D:2}},
+        {t:"Ask the next question, carefully.",                     w:{D:2,O:1}},
+        {t:"Hold the space. Don't probe.",                          w:{O:2,D:1}},
+        {t:"Lighten it — they may not have meant to go there.",     w:{H:2,O:1}}
+      ]},
+    { scene:"The drop lands",
+      text:"Four nights, one Thursday. Which do you actually say yes to?",
+      opts:[
+        {t:"A loud supper somewhere you've never heard of.",        w:{A:2,E:2}},
+        {t:"A listening room where you barely speak.",              w:{D:2,A:-1}},
+        {t:"A wine bar, four hours, no plan.",                      w:{D:2,O:1}},
+        {t:"An 11 PM drive that ends somewhere unplanned.",         w:{A:3}}
+      ]}
+  ];
+
+  /* Persona per top-two pair. Keys are sorted so O+E and E+O both hit. */
+  var PERSONAS = {
+    "EO":["The Opener",         "You are the reason the first ten minutes stop being awkward. You ask before you're asked, and the table warms around it. We seat you with people who go quiet at the start — you'll pull them out, and they'll surprise you."],
+    "DO":["The Confidant",      "You get past the job title faster than almost anyone, and people tell you things they hadn't planned to. We seat you where there's something worth hearing, and away from tables that only want to be light."],
+    "HO":["The Warm Room",      "You're funny in a way that includes people rather than performs at them. That's rarer than it sounds. We put you where a table might otherwise stay polite."],
+    "AO":["The Yes",            "The plan gets better when you're there, because you'll go. We seat you with at least one other person who won't want the night to end at eleven."],
+    "DE":["The Turner",         "You're the one who moves a table from small talk to the real thing, and you do it without making it heavy. We seat you where the night has somewhere to go."],
+    "EH":["The Spark",          "High energy, quick with a line, and the room lifts. We balance you with people who'll go deep once you've got everyone comfortable — otherwise the night stays fun and forgettable."],
+    "AE":["The Instigator",     "You start things. The second venue, the detour, the plan nobody had. We seat you with people who need a push and won't resent getting one."],
+    "DH":["The Dry Deep",       "Serious underneath, funny on top, and the combination disarms people. We keep you away from tables that mistake the jokes for the whole of you."],
+    "AD":["The Long Way Home",  "You'll stay late and you'll stay in the conversation — the two don't always come together. We seat you where the fourth course actually happens."],
+    "AH":["The 11 PM Plan",     "You are what people mean when they say the night got away from them, in the good way. We seat you with a table that can keep up."]
+  };
+
+  var ELS = {
+    intro:  document.getElementById('intro'),
+    quiz:   document.getElementById('quiz'),
+    result: document.getElementById('result'),
+    stage:  document.getElementById('stage'),
+    bar:    document.getElementById('bar'),
+    cnt:    document.getElementById('cnt'),
+    back:   document.getElementById('back')
+  };
+
+  var answers = [];   // index per question, or undefined
+  var at = 0;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function render(){
+    var q = Q[at];
+    ELS.bar.style.width = ((at)/Q.length*100) + '%';
+    ELS.cnt.textContent = pad(at+1) + ' / ' + pad(Q.length);
+    ELS.back.hidden = at === 0;
+
+    var marks = ['i','ii','iii','iv'];
+    var html = '<div class="q"><p class="scene">'+q.scene+'</p><h2 class="qt">'+q.text+'</h2><div class="opts" role="group">';
+    q.opts.forEach(function(o,i){
+      var on = answers[at] === i;
+      html += '<button class="opt" type="button" data-i="'+i+'" aria-pressed="'+(on?'true':'false')+'">'
+            + '<span class="mk" aria-hidden="true">'+marks[i]+'</span><span>'+o.t+'</span></button>';
+    });
+    html += '</div></div>';
+    ELS.stage.innerHTML = html;
+
+    Array.prototype.forEach.call(ELS.stage.querySelectorAll('.opt'), function(b){
+      b.addEventListener('click', function(){ choose(parseInt(b.dataset.i,10)); });
+    });
+  }
+
+  function choose(i){
+    answers[at] = i;
+    if (at < Q.length - 1){ at++; render(); }
+    else { finish(); }
+  }
+
+  function score(){
+    var s = {O:0,E:0,D:0,H:0,A:0}, max = {O:0,E:0,D:0,H:0,A:0};
+    // Track the achievable range per dimension so bars are honest, not arbitrary.
+    Q.forEach(function(q,qi){
+      var lo = {O:0,E:0,D:0,H:0,A:0}, hi = {O:0,E:0,D:0,H:0,A:0};
+      q.opts.forEach(function(o){
+        for (var k in o.w){
+          if (o.w[k] > hi[k]) hi[k] = o.w[k];
+          if (o.w[k] < lo[k]) lo[k] = o.w[k];
+        }
+      });
+      for (var k in hi){ max[k] += (hi[k] - lo[k]); s[k] -= lo[k]; }
+      var w = q.opts[answers[qi]].w;
+      for (var j in w){ s[j] += w[j]; }
+    });
+    var out = {};
+    DIMS.forEach(function(d){
+      var span = max[d.k] || 1;
+      var pct = Math.round(s[d.k] / span * 100);
+      out[d.k] = Math.max(6, Math.min(97, pct));   // keep bars readable at the edges
+    });
+    return out;
+  }
+
+  function finish(){
+    var sc = score();
+    var ranked = DIMS.slice().sort(function(a,b){ return sc[b.k] - sc[a.k]; });
+    var key = [ranked[0].k, ranked[1].k].sort().join('');
+    var p = PERSONAS[key] || ["The Fourth Course","You don't sit at a table the same way twice, which makes you genuinely useful to seat. We'll read the room and put you where it's needed."];
+
+    document.getElementById('pname').textContent = p[0];
+    document.getElementById('pline').textContent = p[1];
+
+    var top = [ranked[0].k, ranked[1].k];
+    document.getElementById('read').innerHTML = DIMS.map(function(d){
+      return '<div class="rd'+(top.indexOf(d.k)>-1?' top':'')+'">'
+           + '<h4>'+d.name+'</h4><span class="pc">'+sc[d.k]+'</span>'
+           + '<div class="bar"><i data-w="'+sc[d.k]+'"></i></div>'
+           + '<p class="note">'+d.note+'</p></div>';
+    }).join('');
+
+    ELS.quiz.hidden = true;
+    ELS.result.hidden = false;
+    window.scrollTo(0,0);
+
+    requestAnimationFrame(function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.rd .bar i'), function(b){
+        b.style.width = b.dataset.w + '%';
+      });
+    });
+
+    var msg = "Hi — I took the seating quiz.\n\nTable read: " + p[0] + "\n"
+            + DIMS.map(function(d){ return d.name + ": " + sc[d.k]; }).join(" · ")
+            + "\n\nI'd like a seat at the next Thursday drop.";
+    var send = document.getElementById('send');
+    if (WHATSAPP){
+      send.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+      send.target = "_blank"; send.rel = "noopener";
+    } else {
+      send.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Seating quiz — " + p[0])
+                + "&body=" + encodeURIComponent(msg);
+    }
+  }
+
+  document.getElementById('start').addEventListener('click', function(){
+    ELS.intro.hidden = true; ELS.quiz.hidden = false; at = 0; answers = []; render();
+  });
+
+  ELS.back.addEventListener('click', function(){
+    if (at > 0){ at--; render(); }
+  });
+
+  document.getElementById('retake').addEventListener('click', function(){
+    answers = []; at = 0;
+    ELS.result.hidden = true; ELS.quiz.hidden = false;
+    window.scrollTo(0,0); render();
+  });
+
+  // Keyboard: 1-4 picks an option, so the whole thing is doable without a mouse.
+  document.addEventListener('keydown', function(e){
+    if (ELS.quiz.hidden) return;
+    var n = parseInt(e.key,10);
+    if (n >= 1 && n <= 4) choose(n-1);
+    if (e.key === 'Backspace' && at > 0){ e.preventDefault(); at--; render(); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -122,10 +122,8 @@
 
   /* manifesto */
   .manifesto{background:var(--sage);color:var(--pine)}
-  .man-grid{display:grid;grid-template-columns:.75fr 1.4fr;gap:clamp(1.5rem,4vw,4rem)}
-  @media(max-width:860px){.man-grid{grid-template-columns:1fr}}
-  .man-side li{list-style:none;font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-size:.62rem;font-weight:600;border-top:1px solid rgba(37,52,43,.3);padding:.7rem 0}
-  .man-q{font-family:var(--caslon);font-size:clamp(1.8rem,4.6vw,3.2rem);line-height:1.08}
+  .man-grid{max-width:52rem}
+  .man-q{font-family:var(--caslon);font-size:clamp(1.8rem,4.6vw,3.2rem);line-height:1.08;max-width:26ch}
   .man-q em{font-family:var(--text);font-style:italic;color:var(--oxblood)}
   .man-body{margin-top:1.6rem;max-width:48ch;font-size:1.05rem;line-height:1.65}
   .nohead{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(37,52,43,.28);margin-top:2.6rem;border:1px solid rgba(37,52,43,.28)}
@@ -282,7 +280,7 @@
         </div>
       </div>
 
-      <a class="btn wide" href="#join">Take the seating quiz →</a>
+      <a class="btn wide" href="/quiz.html">Take the seating quiz →</a>
       <span class="cta-note">Three minutes · no profile · no account</span>
     </div>
   </div>
@@ -321,17 +319,9 @@
 <!-- MANIFESTO -->
 <section class="manifesto">
   <div class="man-grid">
-    <ul class="man-side">
-      <li>On loneliness, quietly</li>
-      <li>On friendship after 30</li>
-      <li>On the third place</li>
-      <li>On the fourth course</li>
-    </ul>
-    <div>
-      <p class="eyebrow">Why a table</p>
-      <p class="man-q">You can't <em>schedule</em> your way into new friends. You have to sit down to a table where you don't already know the ending.</p>
-      <p class="man-body">The first three courses are logistics — the ordering, the eating, the small talk. The fourth is where it turns: plates gone, the check ignored, the person across from you halfway through a story you'll retell for years. That course doesn't happen with your usual people. It happens with strangers chosen by how you actually show up at a table — not by a photo you'd post. That's the whole club.</p>
-    </div>
+    <p class="eyebrow">Why a table</p>
+    <p class="man-q">You can't <em>schedule</em> your way into new friends. You have to sit down to a table where you don't already know the ending.</p>
+    <p class="man-body">The first three courses are logistics — the ordering, the eating, the small talk. The fourth is where it turns: plates gone, the check ignored, the person across from you halfway through a story you'll retell for years. That course doesn't happen with your usual people. It happens with strangers chosen by how you actually show up at a table — not by a photo you'd post. That's the whole club.</p>
   </div>
   <div class="nohead">
     <div><h4>No swiping</h4><p>You get the seat or you don't. No matches, no inbox, no one to chase across an app.</p></div>
@@ -424,7 +414,7 @@
     <div><p class="eyebrow">Apply within</p><h2>By spring, a <em>new</em> group of friends. The maths is the maths.</h2></div>
     <div class="price-card">
       <div class="price">₹1,499<small>per month · up to four weekend nights · you pay your own bill · cancel anytime</small></div>
-      <a class="btn wide" href="#">Take the seating quiz →</a>
+      <a class="btn wide" href="/quiz.html">Take the seating quiz →</a>
     </div>
   </div>
   <p class="eyebrow" id="faq">Honest answers</p>
